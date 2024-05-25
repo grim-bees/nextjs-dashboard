@@ -161,18 +161,6 @@ async function seedRevenue(client) {
 }
 
 async function main() {
-  if (!process.env.VERCEL_ENV) {
-    // Set the WebSocket proxy to work with the local instance
-    neonConfig.wsProxy = (host) => `${host}:5433/v1`;
-    // Disable all authentication and encryption
-    neonConfig.useSecureWebSocket = false;
-    neonConfig.pipelineTLS = false;
-    neonConfig.pipelineConnect = false;
-  }
-
-  if (!process.env.POSTGRES_URL) {
-    throw new Error("POSTGRES_URL is not set");
-  }
   const client = await db.connect();
 
   await seedUsers(client);
